@@ -1,5 +1,5 @@
 'use strict'
-
+const { validateAll } = use('Validator')
 const Dog = use('App/Models/Dog')
 class DogController {
 
@@ -17,6 +17,16 @@ class DogController {
 //metodo post
   async store ({ request, response }) {
     const input = request.all();
+    const rules = {
+      nombre: 'required|unique:dogs,nombre',
+      url_foto:'unique'
+   
+    }
+    const validation = await validateAll(input, rules)
+    if (validation.fails()) {
+      return validation.messages();
+
+    }
 
     await Dog.create(input);
 
