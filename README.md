@@ -17,6 +17,8 @@ Para este proyecto utilice XAMPP control panel para utilizar los servicios de ap
 
 Posteriormente se crea el archivo .env en el proyecto para conectar a la base de datos(guiarce con el .env.example)
 
+no olvidar ejecutar npm install para agregar las dependencias del proyecto
+
 para realizar migracion a la base de datos utilizamos el comando:
 adonis migration:run 
 
