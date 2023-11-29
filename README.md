@@ -26,3 +26,5 @@ para el Seeder utilizamos el comando:
 adonis migration:refresh --seed
 
 para correr el proyecto utilizamos el comando: adonis serve --dev
+
+Dentro de la carpeta backend podra encontrar un archivo .json con mi coleccion de INSOMNIA para que pueda revisar como ingrese los datos 
