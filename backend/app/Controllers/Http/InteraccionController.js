@@ -9,7 +9,7 @@ class InteraccionController {
     const input = request.all();
     if(input.txtBuscar !== undefined){
       return await Interaccion.query()
-                      .where('id', 'like', '%' + input.txtBuscar + '%')
+                      .where('preferencia', 'like', '%' + input.txtBuscar + '%')
                       .fetch();
     }
     return await Interaccion.all();
@@ -19,28 +19,32 @@ class InteraccionController {
 
 
   async store ({ request, response }) {
-    try {
-      const input = request.only(['perro_interesado_id', 'perro_candidato_id', 'preferencia'])
-      const interaccion = await Interaccion.create(input)
-      const rules = {
-      preferencia: 'required|min:1|max:1'
-   
+
+    const input = request.only(['perro_interesado_id', 'perro_candidato_id', 'preferencia'])
+    const rules = {
+    preferencia: 'required|min:1|max:1'
     }
     const validation = await validateAll(input, rules)
     if (validation.fails()) {
       return validation.messages();
-
     }
-    
-      return response.json({ interaccion, res:true, message:"it s a match!" })
-    } catch (error) {
-      return response.status(500).json({ error: 'Error al guardar la interacción' })
+    if(input.preferencia=='A' || input.preferencia=='R'){
+      await Interaccion.create(input)
+    }else{
+      response.json({ message:"solamente puedes ingresar A(aceptado) o R(rechazado) usa mayusculas"})
     }
+    if(input.preferencia=='A'){
+    return response.json({ message:"it s a match!" })
+    }
+    if(input.preferencia=='R'){
+      return response.json({ message:"ok!" })
+      }
   }
+
+
 
   async show ({ params }) {
     return await Interaccion.findOrFail(params.id);
-
   }
 
 
