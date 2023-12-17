@@ -21,23 +21,44 @@ class InteraccionController {
 
 
   async store ({ request, response }) {
+<<<<<<< HEAD
     const input = request.only(['perro_interesado_id', 'perro_candidato_id', 'preferencia'])
     const rules = {
     preferencia: 'required|min:1|max:1|'
+=======
+
+    const input = request.only(['perro_interesado_id', 'perro_candidato_id', 'preferencia'])
+    const rules = {
+    preferencia: 'required|min:1|max:1'
+>>>>>>> deb826c85b4b0f1b6537f07560b85dbbc5f497fe
     }
    
     const validation = await validateAll(input, rules)
     if (validation.fails()) {
       return validation.messages();
-
     }
+<<<<<<< HEAD
     await Interaccion.create(input)
     return response.json({ res:true, message:"it s a match!" })
+=======
+    if(input.preferencia=='A' || input.preferencia=='R'){
+      await Interaccion.create(input)
+    }else{
+      response.json({ message:"solamente puedes ingresar A(aceptado) o R(rechazado) usa mayusculas"})
+    }
+    if(input.preferencia=='A'){
+    return response.json({ message:"it s a match!" })
+    }
+    if(input.preferencia=='R'){
+      return response.json({ message:"ok!" })
+      }
+>>>>>>> deb826c85b4b0f1b6537f07560b85dbbc5f497fe
   }
+
+
 
   async show ({ params }) {
     return await Interaccion.findOrFail(params.id);
-
   }
 
 
