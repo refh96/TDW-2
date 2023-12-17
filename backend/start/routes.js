@@ -19,10 +19,16 @@ const Route = use('Route')
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
+
+Route.post('users', 'UserController.store');
+Route.post('login', 'UserController.login');
+Route.get('get_user', 'UserController.getUser');
 Route.resource('dogs','DogController').apiOnly();
 Route.resource('interaccions','InteraccionController').apiOnly();
 Route.post('cargar_foto/:id', 'DogController.cargarFoto');
 Route.post('/dogs/preferencias', 'InteraccionController.guardarPreferencias');
 Route.get('/dogs/:id/aceptados', 'InteraccionController.perrosAceptados');
 Route.get('/dogs/:id/rechazados', 'InteraccionController.perrosRechazados');
+Route.group(()=>{
 
+}).middleware('auth');

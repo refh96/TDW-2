@@ -1,15 +1,14 @@
 'use strict'
+
 const { validateAll } = use('Validator')
-
 const Interaccion = use('App/Models/Interaccion')
-
 class InteraccionController {
 
   async index ({ request, response }) {
     const input = request.all();
     if(input.txtBuscar !== undefined){
       return await Interaccion.query()
-                      .where('id', 'like', '%' + input.txtBuscar + '%')
+                      .where('preferencia', 'like', '%' + input.txtBuscar + '%')
                       .fetch();
     }
     return await Interaccion.all();
@@ -18,24 +17,22 @@ class InteraccionController {
   }
 
 
+ 
+
+
   async store ({ request, response }) {
-    try {
-      const input = request.only(['perro_interesado_id', 'perro_candidato_id', 'preferencia'])
-      const interaccion = await Interaccion.create(input)
-      const rules = {
-      preferencia: 'required|min:1|max:1'
-   
+    const input = request.only(['perro_interesado_id', 'perro_candidato_id', 'preferencia'])
+    const rules = {
+    preferencia: 'required|min:1|max:1|'
     }
+   
     const validation = await validateAll(input, rules)
     if (validation.fails()) {
       return validation.messages();
 
     }
-    
-      return response.json({ interaccion, res:true, message:"it s a match!" })
-    } catch (error) {
-      return response.status(500).json({ error: 'Error al guardar la interacción' })
-    }
+    await Interaccion.create(input)
+    return response.json({ res:true, message:"it s a match!" })
   }
 
   async show ({ params }) {
