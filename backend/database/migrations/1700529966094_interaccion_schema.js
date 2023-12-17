@@ -9,7 +9,7 @@ class InteraccionSchema extends Schema {
       table.increments()
       table.integer('perro_interesado_id').unsigned().references('id').inTable('dogs').onDelete('CASCADE');
       table.integer('perro_candidato_id').unsigned().references('id').inTable('dogs').onDelete('CASCADE');
-      table.string('preferencia');
+      table.string('preferencia').required();
       table.timestamps();
     })
   }

@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 
 
 const getPerro = async (id) => {
-  const response = await axios.get(`${process.env.SERVIDOR}/perro/search/${id}`)
+  const response = await axios.get(`http://127.0.0.1:3333/dogs/${id}`)
   return response
 }
 
@@ -41,7 +41,7 @@ const editar = ({perro}) => {
   const router = useRouter()
 
   const deletePerro = async () =>{
-    const response = await axios.delete(`${process.env.SERVIDOR}/perro/delete/${router.query.id}`)
+    const response = await axios.delete(`http://127.0.0.1:3333/dogs/${router.query.id}`)
     return response
   }
 

@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 const Tinder = () => {
   const router = useRouter();
   const [perroInteresadoId, setPerroInteresadoId] = useState(null);
-  const [perros, setPerros] = useState([])
+  const [perro, setPerros] = useState([])
   const [perrosCandidatos, setPerrosCandidatos] = useState([]);
   const [aceptadoInput, setAceptadoInput] = useState('');
   const [rechazadoInput, setRechazadoInput] = useState('');
@@ -42,7 +42,7 @@ const Tinder = () => {
       const { id } = router.query;
 
       const data = {
-        perro_interesado_id: perro_id,
+        perro_interesado_id: perro.id,
         perro_candidatos_aceptados: [aceptadoInput],
         perro_candidatos_rechazados: [rechazadoInput],
       };

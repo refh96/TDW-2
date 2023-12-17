@@ -12,23 +12,29 @@ class InteraccionController {
                       .fetch();
     }
     return await Interaccion.all();
-
   }
 
-
   async store ({ request, response }) {
+
     const input = request.only(['perro_interesado_id', 'perro_candidato_id', 'preferencia'])
     const rules = {
-    preferencia: 'required|min:1|max:1|'
+    preferencia: 'required|min:1|max:1'
     }
-   
     const validation = await validateAll(input, rules)
     if (validation.fails()) {
       return validation.messages();
-
     }
-    await Interaccion.create(input)
-    return response.json({ res:true, message:"it s a match!" })
+    if(input.preferencia=='A' || input.preferencia=='R'){
+      await Interaccion.create(input)
+    }else{
+      response.json({ message:"solamente puedes ingresar A(aceptado) o R(rechazado) usa mayusculas"})
+    }
+    if(input.preferencia=='A'){
+    return response.json({ message:"it s a match!" })
+    }
+    if(input.preferencia=='R'){
+      return response.json({ message:"ok!" })
+      }
   }
 
   async show ({ params }) {

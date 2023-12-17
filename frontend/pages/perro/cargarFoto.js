@@ -3,6 +3,7 @@ import {Button, Container, Heading, HStack, Input, Stack, FormControl, FormLabel
 import { Formik } from 'formik'
 import perroValidation from '../../validation/perroValidacion'
 const cargarFoto = () => {
+
     const [file, setFile] = useState(null)
 
     const selectedHandler = (e) => {
@@ -17,7 +18,7 @@ const cargarFoto = () => {
         }
     
         const formdata= new FormData()
-        formdata.append('image',file)
+        formdata.append('avatar',file)
         fetch('http://127.0.0.1:3333/cargar_foto/',{
           method:'POST',
           body:formdata

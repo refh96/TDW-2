@@ -18,15 +18,15 @@ const listarPerro = () => {
         return perros.map((perro => {
             return (
                 <Tr key={perro._id} >
-                    <Td onClick={()=>router.push(`./tinder?=${perro.id}`)}>{perro.nombre}</Td>
+                    <Td>{perro.nombre}</Td>
                     <Td>
                     <img src={perro.url_foto}  style={{ width: '100px', height: 'auto' }} />
                     </Td>
                     <Td>{perro.descripcion}</Td>
-                    <Button colorScheme='red' onClick={()=>router.push(`./eminem`)}>tinder</Button>
-                    <Button colorScheme='red' onClick={()=>router.push(`./cargarFoto`)}>cargarFoto</Button>
-                    <Button colorScheme='blue' onClick={()=>router.push(`./edit/${perro._id}`)}>Editar</Button>
-                    <Button colorScheme='red' onClick={()=>router.push(`./borrar/${perro._id}`)}>Borrar</Button>
+                    <Button colorScheme='red' onClick={()=>router.push(`./crearInteraccion?=${perro.id}`)}>tinder</Button>
+                    <Button colorScheme='red' onClick={()=>router.push(`./cargarFoto?=${perro.id}`)}>cargarFoto</Button>
+                    <Button colorScheme='blue' onClick={()=>router.push(`./edit/${perro.id}`)}>Editar</Button>
+                    <Button colorScheme='red' onClick={()=>router.push(`./borrar/${perro.id}`)}>Borrar</Button>
                 </Tr>
             )
         }))
